@@ -8,6 +8,7 @@ We could learn and try the following tasks:
     4. Print all the dates with a drop more than 2% from yesterday's close when this stock opened;
     5. Execute a simple strategy to trade stock and calc values at the end.
     6. Draw and mark the dates that we choose to purchase or sell stock in our figure.
+
 Author: https://github.com/CharlieZhao95
 """
 import pandas as pd

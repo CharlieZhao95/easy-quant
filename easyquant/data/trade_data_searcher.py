@@ -19,6 +19,8 @@ class TradeDataSearcher(object):
     """
     Query stock trade data bases on baostock package.
 
+    Example to use constructor and query trade data:
+
     >>> stock_info = StockMetadata('sh.603986', '兆易创新', ['半导体', '芯片'])
     >>> searcher = TradeDataSearcher(stock_metadata=stock_info)
     >>> trade_info = TradeMetadata()
@@ -31,7 +33,7 @@ class TradeDataSearcher(object):
         logger.info("Trade data searcher is running.")
 
         self.stock_metadata = stock_metadata
-        # login query system
+        # login database system
         lg = bs.login()
         if lg.error_code != bs_const.BSERR_SUCCESS:
             logger.warning("login respond error code {}, "
@@ -52,11 +54,12 @@ class TradeDataSearcher(object):
             return None
         return k_data
 
-    def save_data_to_csv(self, data, root_path, info="default"):
+    def save_data_to_csv(self, data, root_path, file_name="default"):
         """ Save stock historical data to csv file """
-        dir_path = root_path+"\\{}_{}".format(self.stock_metadata.code,
-                                              self.stock_metadata.name)
+        dir_path = "{}\\{}_{}".format(root_path,
+                                      self.stock_metadata.code,
+                                      self.stock_metadata.name)
         if not os.path.exists(dir_path):
             os.mkdir(dir_path)
-        save_path = dir_path + "\\{}.csv".format(info)
+        save_path = "{}\\{}.csv".format(dir_path, file_name)
         data.to_csv(save_path, index=False)
